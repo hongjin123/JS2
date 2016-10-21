@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#editor
+		{
+			width:600px;
+			height: 300px;
+			border:1px solid #ccc;
+		}
+		#faces{
+			display: none;
+			position: relative;
+			left:200px;
+		}
+	</style>
+</head>
+<body>
+  
+	<div><button id="redBtn">red</button>
+	<button id="leftBtn">left</button>
+	<button id="centerBtn">center</button>
+	<button id="rightBtn">right</button>
+	<button id="face">face</button>
+
+	<img src="img/unbold.gif" alt="" id="btnBold">
+	</div>
+	<div id="faces">
+		<table>
+			<tr><td><img src="img/haha.png" /></td>
+			<td><img src="img/cool.png" /></td>
+			</tr>
+		</table>
+	</div>
+
+	<div id="editor" contenteditable="true">abc</div>
+	<textarea rows="10"></textarea>
+	<script>
+
+		var rbtn=document.getElementById("redBtn");
+		var leftbtn=document.getElementById("leftBtn");
+		var centerbtn=document.getElementById("centerBtn");
+		var rightbtn=document.getElementById("rightBtn");
+		var btnBold=document.getElementById("btnBold");
+		var objEditor=document.getElementById("editor");
+		var btnFace=document.getElementById("face");
+		var faces=document.getElementById("faces");
+		var imgs=faces.getElementsByTagName('img');
+
+		var objTxt=document.getElementsByTagName("textarea")[0];
+		btnFace.onclick=function(){
+			faces.style.display="block";
+		}
+
+		objEditor.onblur=function(){
+			objTxt.value=this.innerHTML	;
+		}
+		objTxt.onblur=function(){
+			objEditor.innerHTML=this.value;
+		}
+		for(var i=0;i<imgs.length;i++){
+			imgs[i].onclick=function(){
+				objEditor.focus();
+				myExecute("insertImage",this.src);
+				faces.style.display="none";
+
+				alert(objEditor.innerHTML);
+			}
+		}
+		function myExecute(command,attr){
+			document.execCommand(command,false,attr);
+		}
+		rbtn.onclick=function(){
+			myExecute("ForeColor","red");
+		}
+		centerBtn.onclick=function(){
+			myExecute("justifyCenter",null);
+		}
+		btnBold.onclick=function(){
+
+			alert(getSelection().toString());
+			//ie 下
+			//document.selection.createRange().text();
+			if(document.queryCommandState("bold")){
+				this.src="img/unbold.gif"	
+			}
+			else
+			{
+				this.src="img/bold.gif"	
+			}
+			document.execCommand("bold",false,null);
+		}
+
+	</script>
+</body>
+</html>

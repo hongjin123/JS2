@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form action="a.php" method="get" name="my"  id="my">
+		<input type="radio" name="sex" value="male" checked />男
+		<input type="radio" name="sex" value="female" />女
+		<br />
+		<select name="city" id="city" multiple>
+			<option value="beijing">beigjing</option>
+			<option >tianjin</option>
+			<option >shanghai</option>
+			<option value="nanjing">nanjing</option>
+			<option >wuhan</option>
+		</select>
+		<input type="checkbox" name="fav1" value="sing" />唱歌
+		<input type="checkbox" name="fav2" value="dance" />跳舞
+		<input type="checkbox" name="fav3" value="eat" />吃
+		<input type="text" name="user" required />
+		<input type="password"  name="password" />
+		<input type="password" name="confirmPassword" />
+		<!--<input type="button" id="sub" value="提交">-->
+		<input type="submit">
+	</form>
+   <p id="test" data-lesson="js">abc</p>
+   <script type="text/javascript">
+   alert(document.getElementById("test").attributes["id"].specified);
+ var user=document.getElementsByName("user")[0];
+   var btnSub=document.getElementById("sub");
+   var myform=document.forms["my"];
+    /* btnSub.onclick=function(){
+   	    var flag= myform.onsubmit();
+   	    if(flag){
+   		myform.submit();
+   	}
+   }*/
+   	/*myform.onsubmit=function(){
+   
+   		if(user.value==""){
+   			alert("用户名不能为空");
+   			return false;
+   		}
+   		else if(user.value.length<6){
+   			alert("用户名过短啦");
+   			return false;
+   		}
+   		return true;
+   		
+   	}*/
+
+   	function serialForm(form){
+   		var arr=[];
+   		for(var i=0;i<form.elements.length;i++){
+   			
+   			var element=form.elements[i];
+   		
+   			switch(element.type){
+   				case "select-one":
+   				case "select-multiple":
+   				    for(var j=0;j<form.city.options.length;j++){
+   				    	var cur=form.city.options[j];
+   				    	if(cur.selected){
+                        if(cur.hasAttribute){
+                           var optvalue=cur.hasAttribute("value")?cur.value:cur.text;
+                        }
+                        else
+                        {
+                           optvalue=cur.attributes["value"].specified?cur.value:cur.text;
+                        }
+   				    		arr.push(element.name+"="+optvalue);
+   				    	}
+   				    }
+   				    break;
+   				case "reset":
+   				case "file" :
+   				case "button":
+   				case "submit":break;
+   				case "radio":
+   				case "checkbox":
+   				   if(!element.checked)
+   				   	break;
+   				default:
+   				    if(element.name.length){
+   					arr.push(element.name+"="+element.value);}
+
+   			}
+   		}
+   		return arr.join("&");
+   	}
+   	myform.onsubmit=function(){
+   		alert(serialForm(myform));
+   		return false;
+   	}
+   	
+   </script>
+</body>
+</html>

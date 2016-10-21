@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script>
+     function isChrome(){
+		ua=navigator.userAgent;
+		if(!/OPR/.test(ua)){
+			if(/Chrome/.test(ua))
+			{
+				return true;
+			}
+			else
+			{
+				return false; 
+			}
+		}
+	}
+	alert(navigator.userAgent)
+	  function isFireFox(){
+		ua=navigator.userAgent;
+		
+			if(/Firefox/.test(ua))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		
+	}
+	function isIE(){
+			ua=navigator.userAgent;
+			if(/MSIE (\d+\.\d+)/.test(ua)){
+				return RegExp["$1"];
+			}
+			if(/Trident/.test(ua)){
+				return "11";
+			}
+			return false;
+	}
+	alert(isIE());
+</script>
+
+</body>
+</html>

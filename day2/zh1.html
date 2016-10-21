@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function Person(name,age){
+			this.name=name;
+			this.age=age;
+			this.show=show1;
+
+		}
+		function show1()
+		{
+			return this.name+","+this.age;
+		}
+		var p=new Person("zs",19);
+		var p1=new Person("ls",20);
+		alert(p.show==p1.show);
+	</script>
+</body>
+</html>

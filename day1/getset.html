@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	var obj2=new Object();
+		obj2.name="zs";
+		obj2.age=30;
+		var obj={
+			$n:0,
+            get next(){
+            	return this.$n++;
+            },
+            set next(n){
+            	if(n>this.$n){
+            		this.$n=n;
+            	}
+            	else
+            	{
+            		console.log("不能输入比$n小的数字");
+            	}
+            }
+		}
+
+		alert(obj.next);
+		alert(obj.next);
+		alert(obj.next);
+
+		alert(obj.next);
+		alert(obj.next);
+
+		/*alert(obj.next);
+		alert(obj.next);
+		alert(obj.next);
+		alert(obj.next);
+		alert(obj.next);
+		obj.next=249;
+		alert(obj.next);*/
+		//alert(obj);
+		//var str=JSON.stringify(obj2);  //对象的序列化 把对象转为字符串
+		//var obj3=JSON.parse(str);  //把字符串转对象
+		/*alert(obj3.name);
+		alert(obj3.age);*/
+
+		//alert(obj3.toLocaleString());
+		//var d=new Date();
+		//alert(d.toLocaleString());
+
+	</script>
+</body>
+</html>

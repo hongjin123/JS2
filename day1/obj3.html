@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function createPerson(name,age){
+			//var p=new Object();
+			var p={};
+			p.name=name;
+			p.age=age;
+			p.showPerson=function()
+			{
+				return this.name+","+this.age;
+			}
+			return p;
+		}
+		function show(obj){
+			for(var t in obj){
+			console.log(t+":"+obj[t]);
+		}
+	}
+	   var p1=createPerson("zs",18);
+
+	   var p2=createPerson("ls",19);
+	   p2.school="bw";
+	   p2.zy="qd";
+
+	   function copy(obj1,obj2){
+	   	   for(var t in obj2){
+	   	   	  if(obj1.hasOwnProperty(t)) continue;
+	   	   	   obj1[t]=obj2[t];
+	   	   }
+	   }
+
+	   copy(p1,p2);
+	   show(p1);
+	   function deletepro(obj1,obj2)
+	   {	//obj1如果没有obj2的属性把obj2对应的属性删除
+	   	    for(var t in obj2){
+	   	    	if(!obj1.hasOwnProperty(t))
+	   	    		delete obj2[t];
+	   	    }
+	   }
+	   deletepro(p1,p2);
+	   show(p2);
+	</script>
+</body>
+</html>

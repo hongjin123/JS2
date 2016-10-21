@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function createPerson(name,age){
+			//var p=new Object();
+			var p={};
+			p.name=name;
+			p.age=age;
+			p.showPerson=function()
+			{
+				return this.name+","+this.age;
+			}
+			return p;
+		}
+		var z=createPerson("zs",30);
+		var l=createPerson("ls",15);
+		function show(obj){
+			for(var t in obj){
+			console.log(t+":"+obj[t]);
+		}
+		}
+		show(z);
+		show(l);
+		alert(z.showPerson());
+		alert(l.showPerson());
+		alert(new Number(123).toString());
+		
+	</script>
+</body>
+</html>

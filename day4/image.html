@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#big{
+			width:300px;
+			height: 100px;
+			overflow: hidden;
+			position:relative;
+
+		}
+		#small
+		{    
+			width:600px;
+			height: 100px;
+			position: absolute;
+
+			left:0;
+		}
+		#small img
+		{
+			width:100px;
+			height: 100px;
+			float:left;
+		}
+	</style>
+</head>
+<body>
+	<div id="big">
+		<div id="small">
+			<img src="img/a.jpg" />
+			<img src="img/b.jpg" />
+			<img src="img/d.jpg" />
+
+		</div>
+	</div>
+	<script type="text/javascript">
+	   function ScrollImg(containerId){
+	   	this.timer=null;
+		this.objSmall=document.getElementById(containerId);
+		this.imgs=this.objSmall.getElementsByTagName('img');
+		this.cloneImage();
+		this.scrollImage();
+		
+		}
+		ScrollImg.prototype.cloneImage=function(){
+		for(var i=0,len=this.imgs.length;i<len;i++){
+			this.objSmall.appendChild(this.imgs[i].cloneNode());
+		}
+	}
+		ScrollImg.prototype.scrollImage=function(){
+			var _this=this;
+		this.timer=setInterval(function(){
+			if(_this.objSmall.offsetLeft>-_this.objSmall.offsetWidth/2)
+			_this.objSmall.style.left=_this.objSmall.offsetLeft-1+"px";
+		    else
+		    _this.objSmall.style.left="0";
+
+		},30);
+	}
+	
+
+	function AdvanceScrollImg(cid){
+		ScrollImg.call(this,cid);
+		this.mouse();
+	}
+	AdvanceScrollImg.prototype=Object.create(ScrollImg.prototype);
+	AdvanceScrollImg.prototype.constructor=AdvanceScrollImg;
+	AdvanceScrollImg.prototype.mouse=function(){
+		var _this=this;
+		_this.objSmall.onmouseover=function(){
+			clearInterval(_this.timer);
+		}
+		_this.objSmall.onmouseout=function(){
+			_this.scrollImage();
+		}
+	}
+    new AdvanceScrollImg("small");
+	</script>
+</body>
+</html>

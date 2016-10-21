@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		table{
+			border:1px solid #000;
+			border-collapse: collapse;
+		}
+
+
+	</style>
+</head>
+<body>
+	<table border="1" width="600" id="tab">
+		<tr>
+			<td>xh</td>
+			<td>xm</td>
+			<td>nl</td>
+			<td>cj</td>
+			<td>xf</td>
+		</tr>
+		<tr>
+			<td>10</td>
+			<td>zs</td>
+			<td>21</td>
+			<td>80</td>
+			<td>5</td>
+		</tr>
+		<tr>
+			<td>19</td>
+			<td>ls</td>
+			<td>19</td>
+			<td>85</td>
+			<td>50000</td>
+		</tr>
+		<tr>
+			<td>11</td>
+			<td>mmz</td>
+			<td>20</td>
+			<td>100</td>
+			<td>30000</td>
+		</tr>
+		<tr>
+			<td>15</td>
+			<td>ww</td>
+			<td>18</td>
+			<td>4</td>
+			<td>20000</td>
+		</tr>
+		<tr>
+			<td>14</td>
+			<td>kk</td>
+			<td>3</td>
+			<td>75</td>
+			<td>15000</td>
+		</tr>
+		<tr>
+			<td>9</td>
+			<td>ee</td>
+			<td>16</td>
+			<td>4</td>
+			<td>3000</td>
+		</tr>
+		<tr>
+			<td>17</td>
+			<td>rr</td>
+			<td>22</td>
+			<td>88</td>
+			<td>5000</td>
+		</tr>
+		
+	</table>
+	<script>
+		var trs=document.getElementsByTagName('tr');
+		var objTab=document.getElementById("tab");
+		heading=trs[0].getElementsByTagName('td');
+		for(var i=0;heading[i];i++){
+			heading[i].index=i;
+			heading[i].onclick=function(){
+				var arr=[];
+				for(var j=1;trs[j];j++){
+					arr.push({
+						value:trs[j].cells[this.index].innerHTML,
+					     row:trs[j]
+					 });
+				}
+				console.log(arr);
+				for(var m=0;m<arr.length-1;m++){
+					for(var n=0;n<arr.length-1-m;n++){
+						if(parseInt(arr[n].value)<parseInt(arr[n+1].value)){
+							var t=arr[n];
+							arr[n]=arr[n+1];
+							arr[n+1]=t;
+						}
+					}
+				}
+				for(var i=0;i<arr.length;i++){
+					objTab.appendChild(arr[i].row);
+				}
+
+			}
+
+		}
+
+
+	</script>
+
+</body>
+</html>

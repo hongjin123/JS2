@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div{
+			margin:0;
+		}
+		a
+		{
+			text-decoration: none;
+			color:#000;
+		}
+		#header a
+		{
+			
+			width: 50px;
+			height: 30px;
+			float: left;
+			margin:10px;
+		}
+		#content
+		{
+			clear:left;
+		}
+		#content div
+		{
+			width:300px;
+			height: 150px;
+			border: 1px solid red;
+			display: none;
+		}
+		#content .current
+		{
+			display: block;
+		}
+		#header .currenttab
+		{
+			background: #ccc;
+		}
+	</style>
+</head>
+<body>
+	<div id="tab">
+		<div id="header">
+			<a href="#" class="currenttab">title1</a>
+			<a href="#">title2</a>
+			<a href="#">title3</a>
+			<a href="#">title4</a>
+		</div>
+		<div id="content">
+			<div class="current">content1</div>
+			<div>content2</div>
+			<div>content3</div>
+			<div>content4</div>
+		</div>
+
+	</div>
+	<script type="text/javascript">
+	 function Tab(headId,contentId){
+	 	 this.objhead=document.getElementById(headId);
+		 this.links=this.objhead.getElementsByTagName('a');
+		 this.objcontent=document.getElementById(contentId);
+		 this.divs=this.objcontent.getElementsByTagName('div');
+		 this.bindclick();
+		 this.index=0;
+
+	 }
+		Tab.prototype.bindclick=function(){
+			var _this=this; //_this 存的当前构造函数的实例
+		 for(var i=0;i<_this.links.length;i++){
+		 	_this.links[i].index=i;
+		 	_this.links[i].onclick=function(){
+		 		_this.aclick(this);
+		 	}
+		 }
+		}
+		 Tab.prototype.aclick=function(curlink){
+		 		this.index=curlink.index;
+		 		for(var j=0;j<this.links.length;j++){
+		 			this.links[j].className="";
+		 			this.divs[j].className='';
+		 		}
+		 		this.links[curlink.index].className="currenttab";
+		 		this.divs[curlink.index].className="current";
+		 	
+		 }
+		 
+
+		 function AdvanceTab(headid,contentid){
+		 	Tab.call(this,headid,contentid);
+		 	this.auto();
+		 }
+		 if(Object.create){
+		 AdvanceTab.prototype=Object.create(Tab.prototype);
+		 }
+		 else
+		 {
+		 	function F(){};
+		 	F.prototype=Tab.prototype;
+		 	AdvanceTab.prototype=new F();
+		 }
+		 AdvanceTab.prototype.constructor=AdvanceTab;
+		
+		 AdvanceTab.prototype.auto=function(){
+		 	var _this=this;
+		 	setInterval(function(){
+		 		if(_this.index<_this.links.length-1){
+		 		_this.index++;
+		 	    }
+		 	    else
+		 	    {
+		 	    	_this.index=0;
+		 	    }
+		 		_this.aclick(_this.links[_this.index]);
+		 	},3000);
+		 }
+		  var t=new AdvanceTab("header","content");
+	</script>
+</body>
+</html>

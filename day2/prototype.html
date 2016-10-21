@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function Person(){
+
+		}
+		var p=new Person();
+
+		Person.prototype.name="zs";
+		Person.prototype.age=18;
+		Person.prototype.friends=["my","mht","lyh"];
+		//原型上是引用类型,如果修改，所有实例都会改
+		Person.prototype.show=function(){
+			return this.name+","+this.age+" "+this.friends;
+		}
+		alert(p.show());
+       /* alert(Person.prototype.constructor);
+
+       
+		var p=new Person();
+		p.name="www";
+		//delete p.name;
+		p.friends.push("leijun");
+		p.age=20;
+		alert(p.show());
+		var p1=new Person();
+		p1.name="li";
+		p1.age=19;
+		alert(p1.show());
+
+		alert(p.show==p1.show);
+		 for(var t in p)
+        {
+        	console.log(t+":"+p[t]);
+        }*/
+	</script>
+</body>
+</html>

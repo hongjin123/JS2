@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	    //构造函数 constructor function 
+		function Person(name,age){
+			this.name=name;
+			this.age=age;
+			this.show=function()
+			{
+				return this.name+","+this.age;
+			}
+			
+		}
+		var p=new Person("zs",16);
+		//alert(p instanceof Person); //探测类型
+		//alert(p.constructor);
+		//alert("name" in p);
+		//hasOwnProperty 本身的属性
+		//in 本身属性和原型的属性
+
+		function isPrototypeProperty(obj,attr){
+			/*if(obj.hasOwnProperty(attr)){
+				return false;
+			}
+			else
+			{
+				return true;
+			}*/
+			return !obj.hasOwnProperty(attr) && attr in obj
+		}
+		alert(isPrototypeProperty(p,"sunlaoshi"));
+		/*//原型上的属性和方法被所有实例所共享
+		Person.prototype.show=function()
+		{
+			alert("abc");
+		}
+		console.log(Person.prototype);
+		var p=new Person("zs",16);
+		var p1=new Person("ls",18);
+		//alert(p.show());
+		//alert(p1.show());
+		//alert(p.show==p1.show);
+		//alert(p.constructor);
+		alert(p.show==p1.show);
+*/
+	</script>
+</body>
+</html>

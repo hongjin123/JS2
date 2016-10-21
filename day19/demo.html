@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+    <p id="jf">无打折</p>
+    <button id="gw">buy</button>
+	<script>
+		var score=0;
+		var btn=document.getElementById("gw");
+		var info=document.getElementById("jf");
+		btn.onclick=function(){
+
+				if(calcDiscount()){
+				info.innerHTML="分数是"+score+"可以打8折";
+			}
+			
+		}
+
+		function calcDiscount(){
+			score+=parseInt(Math.random()*10)
+			console.log(score);
+			if(score>=30){
+				return true;
+		     }
+		     else
+		     {
+		     	return false;
+		     }
+		 }
+		 
+	</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function Person(name,age,bookCount){
+			this.name=name;
+			this.age=age;
+			this.bookCount=0;
+		}
+		Person.prototype.buyBook=function(book){
+			this.bookCount++;
+		}
+		function Book(name,price){
+			this.name=name;
+			this.price=price;
+		}
+		var p=new Person("zs",18,0);
+	    var b=new Book("js高级程序设计",100);
+	    p.buyBook(b);
+	    p.buyBook(b);
+	    alert("人有"+p.bookCount+"本书");
+	</script>
+</body>
+</html>

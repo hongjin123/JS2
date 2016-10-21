@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	    alert(parseInt(Math.random()*7));
+		function Person(name,age){
+			this.name=name;
+			this.age=age;
+		}
+		Person.prototype.show=function(){
+			return this.name+","+this.age;
+		}
+		//var p=new Person("abc",15);
+		//alert(p.show());
+		function Student(name,age){
+		}
+		Student.prototype=new Person();
+		Student.prototype.show=function(){
+			return "student show";
+		}
+		Student.prototype.constructor=Student;
+		var s=new Student("ls",15);
+		//alert(s.constructor)
+		//alert(s.toString());
+	/*	alert(s instanceof Student);
+		alert(s instanceof Person);
+		alert(s instanceof Object);*/
+		//alert(Object.getPrototypeOf(s)==Student.prototype);
+		//获取实例对象的原型对象
+		alert(Student.prototype.isPrototypeOf(s));
+		//判断原型对象是否是实例上的原型
+		</script>
+</body>
+</html>

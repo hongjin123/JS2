@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+
+	<script>
+	
+		function Person(name,age){
+			this.name=name;
+			this.age=age;
+			this.show=function()
+			{
+				return this.name+","+this.age;
+			}
+			
+		}
+		
+		//Person("www",50); //this -> window
+		//alert(show());
+		var obj={};
+		Person.call(obj,"sunlaoshi",333);
+		//Person.apply(obj,["sunlaoshi",333]);
+		alert(obj.show());
+		
+	</script>
+</body>
+
+</html>

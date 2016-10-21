@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function Range(from,to){
+			this.from=from;
+			this.to=to;
+			myfreeze(this);
+		}
+		function myfreeze(o){
+			var props=Object.getOwnPropertyNames(o);
+			for(var i=0;i<props.length;i++)
+			{
+				Object.defineProperty(o,props[i],{
+					configurable:false,
+					enumerable:false,
+					writable:false
+				})
+			}
+			return o;
+		}
+		function hidemethod(o){
+			var props=Object.getOwnPropertyNames(o);
+			for(var i=0;i<props.length;i++)
+			{
+				Object.defineProperty(o,props[i],{
+					configurable:false,
+					
+				})
+			}
+			return o;
+		}
+		Range.prototype=hidemethod({
+			constructor:Range,
+			toString:function(){
+					return this.from+","+this.to;
+				},
+			isRange:function(x){
+				return x>=this.from && x<=this.to;
+			},
+			each:function(fun){
+				for(var i=this.from;i<=this.to;i++){
+						fun(i);
+					}
+			}
+		});
+		var r=new Range(10,15);
+		r.from=20;
+		//alert(r.from);
+		delete r.isRange;
+		alert(r.isRange(15));
+	</script>
+</body>
+</html>

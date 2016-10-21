@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function Person(){
+
+		}
+	
+		Person.prototype={
+			name:"zs",
+			age:18,
+			friends:["my","mht"],
+			show:function()
+			{
+				return this.name+","+this.age+","+this.friends;
+			}
+		}
+		Object.defineProperty(Person.prototype,"constructor",{
+			value:Person,
+			enumerable:false
+		})	
+		var p=new Person();
+		alert(p.show());
+       /* alert(Person.prototype.constructor)
+		var p=new Person();
+		p.name="www";
+		//delete p.name;
+		p.friends.push("leijun");
+		p.age=20;
+		alert(p.show());
+		var p1=new Person();
+		p1.name="li";
+		p1.age=19;
+		alert(p1.show());
+
+		alert(p.show==p1.show);
+
+		for(var t in p)
+        {
+        	console.log(t+":"+p[t]);
+        }*/
+	</script>
+</body>
+</html>

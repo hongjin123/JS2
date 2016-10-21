@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin:0; padding:0;}
+		a{text-decoration: none;color: #000;}
+		#content{clear:both;}
+		#content div{width:300px; height: 150px; border:1px solid red;display: none;}
+		#head a{float: left;width: 50px; height: 30px; margin: 10px;}
+		#head .bg{background: blue;}
+		#content .cont{display: block;}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div id="head">
+			<a href="#" class="bg">title1</a>
+			<a href="#">title2</a>
+			<a href="#">title3</a>
+			<a href="#">title4</a>
+		</div>
+		<div id="content">
+			<div class="cont">content1</div>
+			<div>content2</div>
+			<div>content3</div>
+			<div>content4</div>
+		</div>
+	</div>
+	<script>
+		function Tab(headId,contentId){
+			this.timer=null;
+			this.head=document.getElementById(headId);
+			this.link=this.head.getElementsByTagName("a");
+			this.content=document.getElementById(contentId);
+			this.divs=this.content.getElementsByTagName("div");
+			this.bindclick();
+			this.index=0;
+		}
+		
+		Tab.prototype.bindclick=function(){
+			var _this=this;
+			for(var i=0;i<_this.link.length;i++){
+				_this.link[i].index=i;
+				_this.link[i].onmouseover=function(){
+					_this.aclick(this)
+				};
+			}
+		}
+		Tab.prototype.aclick=function(curlink){
+			this.index=curlink.index;
+			for(var j=0;j<this.link.length;j++){
+				this.link[j].className="";
+				this.divs[j].className="";
+			}
+				this.link[curlink.index].className="bg";
+				this.divs[curlink.index].className="cont";
+		}
+		function Advance(headid,contentid){
+			Tab.call(this,headid,contentid);
+			this.auto();
+			this.move();
+		}
+		Advance.prototype=Object.create(Tab.prototype);
+		Advance.prototype.constructor=Advance;
+		Advance.prototype.auto=function(){
+			var _this=this;
+			_this.timer=setInterval(function(){
+				if(_this.index<_this.link.length-1){
+					_this.index++;
+				}else{
+					_this.index=0;
+				}
+				_this.aclick(_this.link[_this.index])
+			},1000)
+		}
+		Advance.prototype.move=function(){
+			var _this=this;
+			_this.head.onmouseover=function(){
+				clearInterval(_this.timer);
+			}
+			_this.head.onmouseout=function(){
+				_this.auto();
+			}
+		}
+		new Advance("head","content")
+	</script>
+</body>
+</html>

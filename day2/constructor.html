@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	    //构造函数 constructor function 
+		function Person(name,age){
+			this.name=name;
+			this.age=age;
+			
+		}
+
+		//原型上的属性和方法被所有实例所共享
+		Person.prototype.show=function()
+		{
+			alert("abc");
+		}
+		console.log(Person.prototype);
+		var p=new Person("zs",16);
+		var p1=new Person("ls",18);
+		//alert(p.show());
+		//alert(p1.show());
+		//alert(p.show==p1.show);
+		//alert(p.constructor);
+		alert(p.show==p1.show);
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		  function Range(from,to){
+		  	   if(from>to){
+		  	   	  throw new Error("数据不合法");
+		  	   }
+		  	   function setFrom(n){
+		  	   
+		  	   	if(n<=to){
+		  	   	   from=n;
+		  	   	}
+		  	   }
+		  	   function setTo(n){
+		  	   	if(n>=from){
+		  	   	    to=n;
+		  	   	}
+		  	   }
+		  	   function getFrom()
+		  	   {
+		  	   	return from;
+		  	   }
+		  	   function getTo(){
+		  	   	return to;
+		  	   }
+		  	   Object.defineProperties(this,{
+		  	   	  from:{
+		  	   	  	 get:getFrom,set:setFrom,configurable:false,enumerable:true
+		  	   	  },
+		  	   	  to:{
+		  	   	  	 get:getTo,set:setTo,configurable:false,enumerable:true
+		  	   	  },
+		  	   })
+		  }
+
+		  Range.prototype=freezeProp({
+			constructor:Range,
+			toString:function(){
+		  				return this.from+","+this.to;
+		  			},
+		  	isRange:function(x){
+		  		return x>=this.from && x<=this.to;
+		  	},
+		  	foreach:function(fun){
+		  		for(var i=this.from;i<=this.to;i++){
+		  			 fun(i);
+		  		}
+		  	}
+		});
+		function freezeProp(o){
+			var props=Object.getOwnPropertyNames(o);
+			for(var i=0;i<props.length;i++){
+				Object.defineProperty(o,props[i],{
+					configurable:false,writable:false,enumerable:false
+				})
+			}
+			return o;
+		}
+		var p=new Range(10,15);
+		p.from=10;
+		alert(p.from+","+p.to);
+			
+		delete p.toString
+		alert(p);
+	</script>
+</body>
+</html>

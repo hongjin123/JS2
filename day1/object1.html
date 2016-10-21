@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var obj1=new Object();
+		obj1.name="zs";
+		obj1.age=30;
+		obj1.showName=function(){
+			alert(this.name);
+		}
+		//obj1.school="bw";
+		obj1["school"]="bw";
+
+		var obj2=new Object();
+		obj2.name="zs";
+		obj2.age=30;
+		obj2.showName=function()
+		{
+			alert(this.name);
+		}
+		//alert(obj2==obj1);
+		//alert(obj1);  //Object prototype
+		//遍历对象
+		for(var t in obj1){
+			console.log(t+":"+obj1[t]);
+		}
+
+		//alert(new Number(128).toString(16));
+
+		//alert(obj1.hasOwnProperty("name")); //判断属性是否存在
+		//delete obj1.name;  删除属性
+		//alert(obj1.hasOwnProperty("name"));
+
+		Object.defineProperty(obj1,'name',{
+			writable:false,
+			enumerable:true
+		});
+		//obj1.name="zsssss";
+		Object.defineProperty(obj1,'name',{
+			value:"sunlaoshi",
+			writable:false,
+			enumerable:true,
+			
+		});
+		Object.defineProperty(obj1,'age',{
+			configurable:false
+		});
+		delete obj1.age;
+		for(var t in obj1){
+			
+			console.log(t+":"+obj1[t]);
+		}
+		alert("name" in obj1);
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+   
+</head>
+<body>
+   <button id="my">hello</button>
+   <button id="my1">hello</button>
+   <button id="my2">hello</button>
+   <button id="my3">hello</button>
+
+	<script src="js/test.js"></script>
+	<script>
+		 var arr=[1,2,3,4,5,6,7,8,9,0];
+		 var loop=Math.ceil(arr.length/8);
+         var n=arr.length%8;
+         var i=0;
+         do
+         {
+            switch(n){
+            	case 0: process(arr[i++]);
+            	case 7:process(arr[i++]);
+            	case 6:process(arr[i++]);
+            	case 5:process(arr[i++]);
+            	case 4:process(arr[i++]);
+            	case 3:process(arr[i++]);
+            	case 2:process(arr[i++]);
+            	case 1:process(arr[i++]);
+
+            }
+            n=0;
+
+         }while(--loop>0);
+         function process(r){
+         	console.log(r);
+         }
+         var frag=document.createDocumentFragment();
+         var str="";
+         for(i=0;i<10;i++){
+         	
+         	str+="<p>"+i+"</p>";
+         	
+         }
+         document.body.innerHTML=str;
+
+	</script>
+</body>
+</html>

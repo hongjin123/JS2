@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function Person(name,age){
+			this.name=name;
+			this.age=age;
+			alert(this.show);
+			if(typeof this.show !="function"){
+				Person.prototype.show=function()
+			   {
+				return this.name+","+this.age;
+			   }
+		    }
+		}
+		
+		var p=new Person("zs",19);
+		var p1=new Person("zs2",19);
+		alert(p.show==p1.show);
+	</script>
+</body>
+</html>

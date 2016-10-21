@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#news div
+		{
+			display: none;
+		}
+		span
+		{
+			color:red;
+		}
+		
+	</style>
+
+</head>
+<body>
+ <input type="text" id="keywords"><button  id="search">search</button>
+ <div id="searchtitle"></div>
+    <div id="news">
+    	<div>
+    		<h1>八维教务楼漏水</h1>
+			<p>八维教务楼漏水导致整个楼的教学中断</p>
+    	</div>
+    	<div>
+    		<h1>教学系统出故障</h1>
+			<P>导致学生日考被推迟</P>
+    	</div>
+    	<div>
+    		<h1>八维就业信息</h1>
+			<P>平均薪资15K</P>
+    	</div>
+    	<div>
+    		<h1>早操大雨暂停</h1>
+			<P>早操大雨暂停同学很happy</P>
+    	</div>
+    	<div>
+    		<h1>周六放假</h1>
+			<P>补考推迟到下周</P>
+    	</div>
+    </div>
+   
+
+    <script>
+    	var news=[];
+
+    	var objNews=document.getElementById("news");
+    	var divs=objNews.getElementsByTagName("div");
+    	var h1s=objNews.getElementsByTagName("h1");
+    	var ps=objNews.getElementsByTagName('p');
+    	var objTxt=document.getElementById("keywords");
+    	var objSeachTitle=document.getElementById("searchtitle");
+    	var btnSearch=document.getElementById("search");
+    	    for(var i=0;i<ps.length;i++){
+    	    var t={};
+    		t.title=h1s[i].innerHTML;
+    		t.content=ps[i].innerHTML;
+    		news.push(t);
+    	}
+
+    	console.log(news);
+    	btnSearch.onclick=function(){
+    		var content=objTxt.value;
+    		objSeachTitle.innerHTML="";
+    	     for(var j=0;j<divs.length;j++){  //八所有新闻不可见,把变红的词清除 颜色
+    	     	divs[j].style.display="none";
+    	     	divs[j].innerHTML=divs[j].innerHTML.replace(new RegExp("<(span|\\/span)>","gi"),"");
+    	     
+    	     }
+    		if(content==""){
+    			alert("请输入关键词");
+    		}
+    		else
+    		{
+    				  for(var i=0;i<news.length;i++){
+    			  	  if(news[i].title.indexOf(content)>-1 || news[i].content.indexOf(content)>-1){
+    			  	  		divs[i].style.display="block";
+    			  	  		divs[i].innerHTML=divs[i].innerHTML.replace(new RegExp(content,"gi"),"<span>"+content+"</span>");   //关键词变红
+    			  	  }
+    			  }
+    		}
+    		
+    	}
+    	objTxt.onkeyup=function(){
+    		objSeachTitle.innerHTML="";
+    		var words=this.value;
+    		if(words!="")
+    		{
+	    		for(var i=0;i<news.length;i++){
+	    			if(news[i].title.indexOf(words)>-1)
+	    			{
+	    				var tDiv=document.createElement("div");
+	    				tDiv.innerHTML=news[i].title;
+	    				tDiv.style.width="300px";
+	    				tDiv.onmouseover=function(){
+	    					this.style.background="#ccc";
+	    				}
+	    				tDiv.onmouseout=function(){
+	    					this.style.background="#fff";
+	    				}
+	    				tDiv.onclick=function(){
+	    					objTxt.value=this.innerHTML;
+	    					objSeachTitle.innerHTML="";
+	    				}
+	    				objSeachTitle.appendChild(tDiv);
+	    			}
+	    		}
+    		}
+    	}
+    </script>
+	
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	 function isLowIe8(){
+		var o={toString:function(){}};
+		for(var t in o){
+			if(t=="toString"){
+				return false;
+			}
+		}
+
+		return true;
+	}
+	alert(isLowIe8());
+	</script>
+</body>
+</html>

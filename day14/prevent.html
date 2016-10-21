@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var obj={
+			xm:"zs",
+			age:30
+		}
+		//Object.preventExtensions(obj); //阻止添加属性和方法
+		obj.school="bw";
+		alert(obj.school);
+		Object.seal(obj);  //阻止删除
+		delete obj.school;
+		Object.freeze(obj); //阻止添加修改删除
+		obj.school="bwcm";
+		alert(obj.school);
+	</script>
+</body>
+</html>

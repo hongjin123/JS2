@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function Range(from,to){
+			this.from=from;
+			this.to=to;
+			freezeProp(this);
+
+		}
+		Range.prototype=freezeProp({
+			constructor:Range,
+			toString:function(){
+		  				return this.from+","+this.to;
+		  			},
+		  	isRange:function(x){
+		  		return x>=this.from && x<=this.to;
+		  	},
+		  	foreach:function(fun){
+		  		for(var i=this.from;i<=this.to;i++){
+		  			 fun(i);
+		  		}
+		  	}
+		});
+		function freezeProp(o){
+			var props=Object.getOwnPropertyNames(o);
+			for(var i=0;i<props.length;i++){
+				Object.defineProperty(o,props[i],{
+					configurable:false,writable:false,enumerable:false
+				})
+			}
+			return o;
+		}
+
+		var p=new Range(10,15);
+		p.from=30;
+		delete p.foreach;
+		p.foreach(function(x){
+			alert(x);
+		})
+	</script>
+</body>
+</html>

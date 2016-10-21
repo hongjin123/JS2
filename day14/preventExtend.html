@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var obj={
+			name:"aa",
+			age:18
+		}
+		Object.preventExtensions(obj);//阻止添加
+		//delete obj.age;
+		//obj.school="bw";
+		alert(obj.school);
+		Object.seal(obj);//阻止删除添加
+		delete obj.age;
+		Object.freeze(obj); //全部阻止
+		obj.age=19;
+		alert(obj.age);
+
+
+
+	</script>
+</body>
+</html>

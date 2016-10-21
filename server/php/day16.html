@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		td,table
+		{
+			border:1px solid #000;
+			border-collapse:collapse;
+		}
+	</style>
+</head>
+<body>
+	<table border="1" width="300" id="mytable">
+		<tr>
+			<td>xh</td>
+			<td>xm</td>
+			<td>nl</td>
+			<td>cj</td>
+			<td>xf</td>
+		</tr>
+		<tr>
+			<td>10</td>
+			<td>zs</td>
+			<td>16</td>
+			<td>60</td>
+			<td>20000</td>
+		</tr>
+		<tr>
+			<td>13</td>
+			<td>ls</td>
+			<td>18</td>
+			<td>80</td>
+			<td>22000</td>
+		</tr>
+		<tr>
+			<td>16</td>
+			<td>sun</td>
+			<td>13</td>
+			<td>80</td>
+			<td>25000</td>
+		</tr>
+		<tr>
+			<td>17</td>
+			<td>ws</td>
+			<td>14</td>
+			<td>55</td>
+			<td>10000</td>
+		</tr>
+		<tr>
+			<td>19</td>
+			<td>ll</td>
+			<td>16</td>
+			<td>65</td>
+			<td>2000</td>
+		</tr>
+
+	</table>
+	<script>
+	    var tab=document.getElementById("mytable");
+		var trs=document.getElementsByTagName('tr');
+		var heading=trs[0].getElementsByTagName("td");
+		for(var i=0;heading[i];i++){
+			heading[i].index=i;
+			
+			heading[i].onclick=function(){
+				var arr=[];
+				for(j=1;trs[j];j++){
+					arr.push({
+						value:trs[j].cells[this.index].innerHTML,
+						row:trs[j]
+					});
+				}
+
+				//冒泡排序时相邻的比较
+
+				for(var m=0;m<arr.length-1;m++){
+					for(var n=0;n<arr.length-m-1;n++){
+						
+						if(parseInt(arr[n].value)<parseInt(arr[n+1].value)){
+
+							t=arr[n].row;
+							arr[n].row=arr[n+1].row;
+							arr[n+1].row=t;
+						}
+					}
+
+				}
+				console.log(arr);
+				for(i=0;i<arr.length;i++){
+					tab.appendChild(arr[i].row);
+				}
+				
+			}
+		}
+
+
+	</script>
+</body>
+</html>

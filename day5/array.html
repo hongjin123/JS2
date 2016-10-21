@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	Array.prototype.toString=function()
+	{
+		var str="八维数组显示专用:";
+		for(var i=0;i<this.length;i++)
+		{
+			str+=this[i]+"----";
+		}
+		return str;
+	}
+		var data=[1,2,3,4,5];
+		/*for(i=0;i<data.length;i++){
+			data[i]=data[i]*data[i];
+		}*/
+		/*data.forEach(function(x,index,array){
+			array[index]=x*x;
+		});*/
+		
+		/*function mod3sum(array){
+			var sum=0;
+			data.forEach(function(x){
+			 if(x%3==0){
+			 	sum+=x;
+			 }
+		});*/
+
+			//return sum;
+		//}
+	//alert(mod3sum(data));
+	var myData=data.map(function(x){
+		return x*x;
+	});
+	alert(data);
+	String.prototype.toCamel=function(){
+		var reg=/-(\w)/g;
+		return this.replace(reg,function(){
+			
+			return arguments[1].toUpperCase();
+		})
+	}
+	alert("hello-world-javascript".toCamel());
+	
+	</script>
+</body>
+</html>

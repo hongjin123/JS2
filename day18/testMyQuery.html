@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	<script src="js/MyQuery.js"></script>
+	<div class="abc">a</div>
+	<div id="test">b</div>
+	<div class="abc">c</div>
+	<div>d</div>
+   <script>
+   	  $(function()
+   	   {
+   	   	  alert("init...");
+   	   });
+   	   /*$("div").click(function(){
+   	   		alert($(this).html());
+   	   });*/
+/*
+   	   $("#test").toggle(function(){
+   	   	    $(".abc").hide();
+
+   	   },function(){
+   	   		$(".abc").show();	
+   	   }
+   	  
+   	  );*/
+   	  $("#test").click(function(){
+   	  	//alert($("div").css("background"));
+   	  	  $("div").attr("title","hello hello");
+   	  	  alert($(this).attr("id"));
+   	  });
+
+   	 </script>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	    //工厂模式
+		function createObject(prop1,prop2){
+			var obj=new Object();
+			obj.prop1=prop1;
+			obj.prop2=prop2;
+			obj.show=function()
+			{
+				return this.prop1+","+this.prop2;
+			}
+			return obj;
+
+		}
+
+		var p=createObject("aa",18);
+		alert(p instanceof Object);
+		alert(p.show());
+		for(var t in p){
+			console.log(p[t]);
+		}
+	</script>
+</body>
+</html>

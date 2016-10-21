@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/MyQuery.js"></script>
+	<script src="js/move.js"></script>
+	  <style>
+	     #container
+	     {
+	     	width:100px;
+	     	height: 100px;
+	     	overflow: hidden;
+	     	position: relative;
+	     }
+	     #small
+	     {
+	     	 width: 300px;
+	     	 height: 100px;
+	     	 position: absolute;
+	     	 left:0;
+	     }
+	     #small div
+	     {
+	     	float: left;
+	     	width:100px;
+	     	height:100px;
+	     	background: #ccc;
+	     }
+	     #small button
+	     {
+	     	z-index:5;
+	     	position: absolute;
+	     	top:50px;
+
+
+	     }
+	     #prev
+	     {
+	     	left:0;
+	     }
+	     #next
+	     {
+	     	left:60px;
+	     }
+	  </style>
+</head>
+<body>
+    <div id="header">
+    	<button>1</button>
+    	<button>2</button>
+    	<button>3</button>
+    </div>
+    <div id="container">
+        <div id="small">
+           <div>111</div><div>222</div><div>33</div>
+           <button id="next">next</button>
+           <button id="prev">prev</button>
+        </div>
+    </div>
+	<script>
+	 var len=$("#small").find("div").elements.length;
+	 var flag=true;
+	 var index=0;
+	  function auto()
+	  {   
+	  	if(!flag) return;
+
+        $("#small").find("div").eq(0).animate({"marginLeft":-100},function(){
+        	   index++;
+        	   if(index==len){
+        	   	  index=0;
+        	   }
+        	   console.log(index);
+        	   moveRight();
+        	   
+        	   setTimeout("auto()",2000);
+        })
+    }
+ 
+    $("#header").find("button").click(function(){
+        flag=false;
+        var to=$(this).index();
+        var from=index;
+        while(from!=to){
+        	from++;
+        	if(from==len)
+        		from=0;
+        	moveRight();
+        }
+        index=to;
+
+    });
+
+    $("#header").elements[0].onmouseout=function(){
+    	 flag=true;
+    	 auto();
+    }
+    $("#next").hide();
+    $("#prev").hide();
+    $("#small").hover(
+    	function(){
+           $("#next").show();
+           $("#prev").show();
+    	},
+    	function(){
+    		$("#next").hide();
+   			 $("#prev").hide();
+    		 flag=true;
+      	   auto();
+    	}
+
+   )
+    $("#next").click(function(){
+    	flag=false;
+    	index++;
+    	if(index==len){
+    		index=0;
+    	}
+    	moveRight();
+    	$("#small").find("div").eq(0).animate({"marginLeft":-100});
+    });
+      $("#prev").click(function(){
+    	flag=false;
+    	index--;
+    	if(index<0){
+    		index=len-1;
+    	}
+    	moveLeft();
+    	$("#small").find("div").eq(0).animate({"marginLeft":0});
+    });
+     
+
+       function moveRight(){
+       	  var t=$("#small").find("div").eq(0).elements[0].cloneNode(true);
+        	  $("#small").elements[0].removeChild($("#small").find("div").eq(0).elements[0]);
+        	  $(t).css("marginLeft",0);
+        	  $("#small").elements[0].appendChild(t);
+       }
+         function moveLeft(){
+       	  var t=$("#small").find("div").eq(len-1).elements[0].cloneNode(true);
+        	  $("#small").elements[0].removeChild($("#small").find("div").eq(len-1).elements[0]);
+        	  $(t).css("marginLeft","-100px");
+        	  $("#small").elements[0].insertBefore(t,$("#small").find("div").eq(0).elements[0]);
+       }
+       
+       auto();
+	</script>
+</body>
+</html>

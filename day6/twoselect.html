@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<select name="lesson" id="lesson"></select>
+	<select name="subLesson" id="subLesson"></select>
+	<script>
+		var data=[["qd","js","div","css"],["UI","ps","ai","wui"]];
+		var objLesson=document.getElementById("lesson");
+		var objSub=document.getElementById("subLesson");
+		for(var i=0;i<data.length;i++){
+		objLesson.options[objLesson.options.length]=new Option(data[i][0]);
+}
+
+    		objLesson.onchange=function(){
+			objSub.options.length=0;
+			var index=this.selectedIndex;
+			
+			var selectLesson=data[index];
+		
+			for(var i=1;i<selectLesson.length;i++){
+				objSub.options[objSub.options.length]=new Option(selectLesson[i]);
+							}
+				}	
+
+				
+				objLesson.onchange();
+
+
+</script>
+</body>
+</html>

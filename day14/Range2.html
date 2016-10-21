@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+ 
+	<script>
+		function Range(from,to){
+			if(from>=to){
+				throw new Error("数据不靠谱");
+			}
+			function getFrom()
+			{
+				return from;
+			}
+			function getTo()
+			{
+				return to;
+			}
+			function setFrom(n){
+				if(n<=to){
+					from=n;
+				}
+			}
+			function setTo(n){
+				if(n>=from){
+					to=n;
+				}
+			}
+			Object.defineProperties(this,{
+				from:{set:setFrom,get:getFrom,configurable:false,enumerable:true},
+				to:{set:setTo,get:getTo,configurable:false,enumerable:true}
+			});
+
+			
+		}
+		
+		function hidemethod(o){
+			var props=Object.getOwnPropertyNames(o);
+			for(var i=0;i<props.length;i++)
+			{
+				Object.defineProperty(o,props[i],{
+					configurable:false,
+					
+				})
+			}
+			return o;
+		}
+		Range.prototype=hidemethod({
+			constructor:Range,
+			toString:function(){
+					return this.from+","+this.to;
+				},
+			isRange:function(x){
+				return x>=this.from && x<=this.to;
+			},
+			each:function(fun){
+				for(var i=this.from;i<=this.to;i++){
+						fun(i);
+					}
+			}
+		});
+		var r=new Range(10,15);
+		r.from=20;
+		//alert(r.from);
+		delete r.isRange;
+		alert(r.isRange(15));
+		alert(r);
+	</script>
+</body>
+</html>

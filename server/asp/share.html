@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script>
+	//享元模式
+	//图书 （名字，作者，书号 ,读者号，流水号,借阅日期)
+
+	//如果一本书被多人借阅 内部数据  外部数据
+	function Book(name,author,isbn){
+		this.name=name;
+		this.author=author;
+		this.isbn=isbn;
+	}
+
+	Fac=(function(){
+		var books={}; //书库里的书是不重复
+		return{
+			getBook:function(name,author,isbn){
+				if(books[isbn]){
+					return books[isbn];
+				}
+				else
+				{
+					var b=new Book(name,author,isbn);
+					books[isbn]=b;
+					return b;
+				}
+			}
+		}
+
+	})();
+
+    function BookManage(){
+    	  var records={};
+    	  this.lend=function(name,author,isbn,rid,fid,lendDate){
+    	  		var b=Fac.getBook(name,author,isbn);  //得到不重复的书
+ 				records[fid]={
+ 					 person:rid,
+ 					 fid:fid,
+ 					 date:lendDate,
+ 					 book:b
+ 				}
+ 				return records;
+    	  }
+    }
+    var m=new BookManage();
+    var record=m.lend("mhkl","yqy","12345","123","20160723103435123","2013-7-23")["20160723103435123"];
+    
+    alert(record.book.name+","+record.date);
+</script>
+
+</body>
+</html>

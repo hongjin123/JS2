@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+    <button id="btn">获取北京数据</button>
+    <button id="btn1">获取天津数据</button>
+    <button id="btn2">获取上海数据</button>
+    <script>
+   		 function func(r){
+    			for(var t in r)
+    			alert(r[t]);
+    		}
+    		function test(r){
+    			for(var t in r)
+    			alert("没有提供回调，默认的回调函数取回的数据时"+r[t]);
+    		}
+    </script>
+
+    <script id="myscript"></script>
+    <script>
+    		
+
+           btn=document.getElementById("btn");
+           btn1=document.getElementById("btn1");
+           btn2=document.getElementById("btn2");
+           objScript=document.getElementById("myscript");
+
+            
+           btn.onclick=function(){
+           	  
+           	   objScript.src="http://localhost:8000/ser.php";
+           	   location.reload();  
+           	  
+           }
+           btn1.onclick=function(){
+           	    
+           	   objScript.src="http://localhost:8000/ser.php?city=tianjin&cb=func";
+           	    location.reload();
+           	  
+           	            	 
+           }
+              btn2.onclick=function(){
+              	  
+           	   objScript.src="http://localhost:8000/ser.php?city=shanghai";
+           	   
+           	   location.reload();  
+           	   
+
+           	 
+           }
+
+    </script>
+	
+	
+
+</body>
+</html>

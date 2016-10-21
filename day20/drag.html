@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#div1
+		{
+			width:100px;height:100px;background: #ccc;position: absolute;
+		}
+		#container
+		{
+			width:600px;
+			height: 600px;
+			border:1px solid red;
+			position: relative;
+		}
+	</style>	
+
+</head>
+<body>
+  <div id="container">
+	<div id="div1"></div>
+  </div>
+	<script>
+	   function Drag(id){
+	   	_this=this;
+	   	  this.oDiv=document.getElementById(id);
+	   	  this.disX=0;
+	   	  this.disY=0;
+	   	  this.oDiv.onmousedown=function(ev){
+			e=ev||event;
+			_this.mousedown(e)
+	   	  }
+	   }
+		Drag.prototype.mousedown=function(e){
+			_this=this;
+			this.disX=e.clientX-this.oDiv.offsetLeft;
+			this.disY=e.clientY-this.oDiv.offsetTop;
+			document.onmousemove=function(ev){
+					e=ev||event;
+			       _this.mousemove(e)
+			}
+			document.onmouseup=function(){
+				document.onmousemove=null;
+			}
+		}
+		Drag.prototype.mousemove=function(e){
+			    this.oDiv.style.left=e.clientX-this.disX+"px";
+				this.oDiv.style.top=e.clientY-this.disY+"px";
+		}
+		function AdvDrag(id){
+			Drag.call(this,id);
+			this.container=document.getElementById("container");
+		}
+		if(Object.create){
+			AdvDrag.prototype=Object.create(Drag.prototype);
+		}
+		else
+		{
+			function F(){};
+			F.prototype=Drag.prototype;
+			AdvDrag.prototype=new F;
+		}
+		AdvDrag.prototype.constructor=AdvDrag;
+		new AdvDrag("div1");
+		AdvDrag.prototype.mousemove=function(e){
+			  this.oDiv.style.left=e.clientX-this.disX+"px";
+			  this.oDiv.style.top=e.clientY-this.disY+"px";
+			  if(this.oDiv.offsetLeft<0){
+			  	this.oDiv.style.left=0;
+			  }
+			  if(this.oDiv.offsetTop<0){
+			  	this.oDiv.style.top=0;
+			  }
+			  if(this.oDiv.offsetLeft>this.container.offsetWidth-this.oDiv.offsetWidth)
+			  {
+			  	this.oDiv.style.left=this.container.offsetWidth-this.oDiv.offsetWidth+"px";
+			  }
+			  if(this.oDiv.offsetTop>this.container.offsetHeight-this.oDiv.offsetHeight)
+			  {
+			  	this.oDiv.style.top=this.container.offsetHeight-this.oDiv.offsetHeight+"px";
+			  }
+		}
+		
+	</script>
+</body>
+</html>

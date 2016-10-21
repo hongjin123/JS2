@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+	    function func(x){
+	    	for(var t in x)
+	    	alert("from php server city:"+t+x[t]);
+	    }
+	    function fun(x){
+	    	for(var t in x)
+	    	alert("default:city"+t+x[t]);
+	    }
+	</script>
+</head>
+<button id="btn">button1</button>
+<button id="btn2">button2</button>
+<body>
+	
+	<script>
+	 	var objBtn=document.getElementById("btn");
+	 	var objBtn2=document.getElementById("btn2");
+	 	objBtn.onclick=function(){
+	 		var oScr=document.createElement("script");
+	 		oScr.src="http://localhost:8000/c.php";
+	 		document.body.appendChild(oScr);
+	 		document.body.removeChild(oScr);
+	 	}
+	 	objBtn2.onclick=function(){
+	 		var oScr=document.createElement("script");
+	 		oScr.src="http://localhost:8000/c.php?cb=func&city=shanghai";
+	 		document.body.appendChild(oScr);
+	 		document.body.removeChild(oScr);
+	 	}
+	</script>
+
+</body>
+</html>

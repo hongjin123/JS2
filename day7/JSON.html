@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// alert({
+		// 	"aa":"aaa",
+		// 	"bb":"def"
+		// }.aa);
+		// alert(["aa",12]["0"]);
+		// alert(5);
+		var str='{"name":"zhangsan","age":10,"birth":"1999-10-15"}';
+		
+		var obj=JSON.parse(str,function(key,value){
+			if(key=="birth"){
+				return new Date(value);
+			}
+			else if(key=="age"){
+				if(value<15){
+					return 15;
+				}
+				else
+				{
+					return value;
+				}
+			}
+			else{
+				return value;
+			}
+			
+		});
+		
+
+		alert(obj.birth.getFullYear()+","+obj.age);
+
+		var obj2={
+			"name":"lisi",
+			"age":20,
+			"school":"bw",
+			"book":{
+				"name":"js高级程序设计",
+				"price":120.23
+			}
+		};
+		var arr=[];
+		arr[2]="name";
+		arr[1]="school";
+		arr[0]="book";
+		alert(JSON.stringify(obj2,arr,4));
+
+		var strs=['{"name":"zhangsan","birth":"1999-11-11","jobDate":"2015-12-12"}',
+		'{"name":"lishi","birth":"1995-12-15","jobDate":"2013-12-12"}',
+		'{"name":"wmz","birth":"1997-6-18","jobDate":"2014-12-12"}'
+		];
+		var person=[];
+		for(var i=0;i<strs.length;i++){
+			person[i]=JSON.parse(strs[i],function(key,value){
+				if(key=="birth" || key=="jobDate"){
+					return new Date().getFullYear()-new Date(value).getFullYear();
+				}
+				else
+				{
+					return value;
+				}		
+
+			});
+		}
+        for(var i=0;i<person.length;i++){
+        	var str="";
+        	for(var t in person[i]){
+        		str+=person[i][t];
+        	}
+        	alert(str);
+        }
+	</script>
+</body>
+</html>

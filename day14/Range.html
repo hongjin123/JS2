@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function Range(from,to){
+            var props={
+            	from:{
+            		value:from
+            	},
+            	to:{
+            		value:to
+            	}
+            }
+            if(this instanceof Range)
+			Object.defineProperties(this,props);
+		    else
+		    return Object.create(Range.prototype,props);
+
+		}
+		Object.defineProperties(Range.prototype,{
+			toString:{
+				value:function(){
+					return this.from+","+this.to;
+				}
+			},
+			isRange:{
+				value:function(x){
+					return x>=this.from && x<=this.to;
+				}
+			},
+			each:{
+				value:function(fun){
+					for(var i=this.from;i<=this.to;i++){
+						fun(i);
+					}
+				}
+			}
+		});
+
+		
+		var r=Range(10,15);
+		r.from=25;
+
+		r.each(function(x){
+			alert(x);
+		})
+
+	
+	</script>
+</body>
+</html>
